@@ -1,6 +1,10 @@
 package controller;
 
+import entities.Monkey;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/type")
@@ -22,5 +26,17 @@ public class Type {
             stringBuffer.append(name);
         }
         return "names: " + stringBuffer;
+    }
+
+    @PostMapping(value = "/json",consumes = "application/json")
+    public String jsonType(@RequestBody(required = false) Monkey monkey){
+        return "master name: " + monkey.getName();
+    }
+
+    @GetMapping("/map")
+    public Map<String, String> mapType(){
+        Map map = new HashMap<String, String>();
+        map.put("name", "Jon Snow");
+        return map;
     }
 }
